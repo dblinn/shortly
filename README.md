@@ -11,5 +11,14 @@ It's going to be fun!
 ## To Install
 
 * Clone the project from git
-* In the base directory of the cloned project, run 'bundle'
-* If you get an error describing a ruby version mismatch and you're using rvm, you can run 'rvm use 2.2.0'
+** ```git clone https://github.com/DavidBlinn/shortly```
+* In the base directory of the cloned project
+** ```bundle```
+* If you get an error describing a ruby version mismatch and you're using rvm, you can
+** ```rvm use 2.2.0```
+
+* To start the application
+** ```thin start```
+** You can then visit localhost:3000 to see the application
+* To run the test suite
+** ```rspec```
