@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'haml'
 require 'sinatra/json'
+require './lib/url_shortener'
 
 module Shortly
   class Application < Sinatra::Application
@@ -16,7 +17,7 @@ module Shortly
     end
 
     post '/shorten' do
-      json ok: 200
+      json UrlShortener.new(url: params[:url]).response
     end
   end
 end
