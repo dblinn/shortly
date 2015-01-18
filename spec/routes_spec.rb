@@ -17,7 +17,14 @@ describe 'Shortly::Application' do
 
   describe 'GET "/top_hundred"' do
     it 'serves the route for the top hundred' do
-      get '/'
+      get '/top_hundred'
+      expect(last_response).to be_ok
+    end
+  end
+
+  describe 'POST "/shorten"' do
+    it 'serves the post route for url shortening' do
+      post '/shorten', { url: 'www.nytimes.com' }
       expect(last_response).to be_ok
     end
   end

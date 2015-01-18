@@ -1,13 +1,16 @@
 %div.top_hundred
   %a{ href: '/top_hundred' }
     %button.top_hundred_button.btn.btn-sm.btn-default
-      %i{class: 'fa fa-line-chart fa-4x'}
+      %i{class: 'fa fa-line-chart fa-3x'}
 %div.shortly-bar
   %center
     %a{ href: '/' }
       %img{ src: 'images/shorts.png', class: 'shorts-logo' }
-  %div.col-lg-8.col-lg-offset-2
-    %div.input-group
-      %input{ type: 'text', class: 'form-control', placeholder: 'Enter a URL...' }
-      %span.input-group-btn
-        %button.btn.btn-success{ type: 'button', class: 'shorten-button' }Shorten!
+  %div.col-lg-6.col-lg-offset-3
+    %form#shortly-form
+      %div.input-group
+        %input#shortly-input{ type: 'text', class: 'form-control', placeholder: 'Enter a URL...' }
+        %span.input-group-btn
+          %button#shortly-shorten-button.btn.btn-success{ type: 'submit', class: 'shorten-button' }Shorten!
+
+%script(src="javascripts/index.js")
