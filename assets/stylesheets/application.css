@@ -1,0 +1,21 @@
+.top_hundred {
+  position: relative;
+}
+
+.top_hundred a {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+
+  margin: 8px 8px;
+}
+
+.top_hundred button {
+  padding: 2px 4px;
+  background: rgba(240, 240, 240, 0.4)
+}
+
+/*.fa-line-chart {
+  color: darkgoldenrod;
+}
+*/
