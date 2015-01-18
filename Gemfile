@@ -19,5 +19,9 @@ group :development, :test do
 	gem 'pry'
 end
 
+group :test do
+	gem 'rspec-html-matchers', github: 'kucaahbe/rspec-html-matchers'
+end
+
 # Server
 gem 'thin'

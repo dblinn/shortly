@@ -10,6 +10,8 @@ describe 'Shortly::Application' do
     it 'serves the root url' do
       get '/'
       expect(last_response).to be_ok
+      expect(last_response.body).to match('shorts-logo')
+      expect(last_response.body).to match('/top_hundred')
     end
   end
 
