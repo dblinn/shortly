@@ -2,4 +2,18 @@
   %a{ href: '/top_hundred' }
     %button.top_hundred_button.btn.btn-sm.btn-default
       %i{class: 'fa fa-line-chart fa-4x'}
-%p= "Hello world, it's #{Time.now} at the server!"
+%div.shortly-bar
+  %div.col-lg-4.col-lg-offset-4
+    %div.input-group
+      %input{ type: 'text', class: 'form-control', placeholder: 'Enter a URL...' }
+      %span.input-group-btn
+        %button.btn.btn-success{ type: 'button', class: 'shorten-button' }Shorten!
+
+-#<div class="col-lg-6">
+-#  <div class="input-group">
+-#    <input type="text" class="form-control" placeholder="Search for...">
+-#    <span class="input-group-btn">
+-#      <button class="btn btn-default" type="button">Go!</button>
+-#    </span>
+-#  </div><!-- /input-group -->
+-#  </div><!-- /.col-lg-6 -->

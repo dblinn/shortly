@@ -1,5 +1,5 @@
 .top_hundred {
-  position: relative;
+  position: static;
 }
 
 .top_hundred a {
@@ -15,7 +15,14 @@
   background: rgba(240, 240, 240, 0.4)
 }
 
-/*.fa-line-chart {
-  color: darkgoldenrod;
+.shortly-bar {
+  margin: 250px 0px 0px 0px;
 }
-*/
+
+.fa-line-chart {
+  color: rgb(76, 174, 76);
+}
+
+.shorten-button {
+  height: 34px;
+}
