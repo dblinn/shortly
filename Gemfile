@@ -9,6 +9,7 @@ gem 'rake'
 gem 'sprockets'
 gem 'sprockets-memcache-store'
 gem 'uglifier'
+gem 'haml'
 
 # DB
 gem 'mongoid'

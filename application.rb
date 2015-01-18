@@ -1,10 +1,13 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'haml'
 
 module Shortly
   class Application < Sinatra::Application
+    set :public_folder, File.dirname(__FILE__) + '/assets'
+
     get '/' do
-      'Hello world!'
+      haml :index
     end
 
     get '/top_hundred' do

@@ -22,3 +22,5 @@ It's going to be fun!
 ** You can then visit localhost:3000 to see the application
 * To run the test suite
 ** ```rspec```
+
+* To view the app on Heroku visit ```https://shortly-app.herokuapp.com/```
