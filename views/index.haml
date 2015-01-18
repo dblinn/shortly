@@ -1,7 +1,8 @@
 %div.top_hundred
   %a{ href: '/top_hundred' }
     %button.top_hundred_button.btn.btn-sm.btn-default
-      %i{class: 'fa fa-line-chart fa-3x'}
+      %i{class: 'fa fa-line-chart fa-3x bootstrap-green'}
+
 %div.shortly-bar
   %center
     %a{ href: '/' }
@@ -12,5 +13,23 @@
         %input#shortly-input{ type: 'text', class: 'form-control', placeholder: 'Enter a URL...' }
         %span.input-group-btn
           %button#shortly-shorten-button.btn.btn-success{ type: 'submit', class: 'shorten-button' }Shorten!
+    %div#invalid-url{style: 'clear: both'}
+      %span.invalid-url-text.bootstrap-red.hidden Oops! this doesn't appear to be a valid url
+
+%div#shortened-responses.col-lg-6.col-lg-offset-3
+  %div#success-seed.hidden
+    %div.shorten-success-panel.bs-callout-success
+      %span.link-icon
+        %button.copy-button.btn.btn-sm.btn-default
+          %i{class: 'fa fa-copy fa-2x bootstrap-green'}
+      %span.short-link-text.bootstrap-green Hello
+      %div.full-link-text
+        %a.full-link-link{ href: 'www.nytimes.com' }www.nytimes.com
+  %div#failure-seed.hidden
+    %div.shorten-failure-panel.bs-callout-danger
+      %span.failure-message.bootstrap-red We're experiencing technical difficulties
+      %div.full-link-text
+        %a.full-link-link{ href: 'www.nytimes.com' }www.nytimes.com
+
 
 %script(src="javascripts/index.js")
