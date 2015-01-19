@@ -1,7 +1,8 @@
 module Shortly
   class AccessTokens
     ACCESS_TOKEN_LENGTH = 8
-    ACCESS_TOKEN_REGEX = /^[a-z0-9]{8}$/
+    ACCESS_TOKEN_EXPRESSION = '[a-z0-9]{8}'
+    ACCESS_TOKEN_REGEX = /^#{ACCESS_TOKEN_EXPRESSION}$/
 
     def self.generate
       # Adapted from http://zh.soup.io/post/36288765/How-to-create-small-unique-tokens-in

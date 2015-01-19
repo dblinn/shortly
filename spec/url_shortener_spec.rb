@@ -16,7 +16,7 @@ module Shortly
       response = shortener.response
   
       expect(response).to_not be_nil
-      expect(response).to eq({ success: true, original_url: 'http://www.nytimes.com', short_url: 'http://localhost/shorter' })
+      expect(response).to eq({ success: true, source_url: 'http://www.nytimes.com', short_url: 'http://localhost/shorter' })
     end
   
     describe '#valid' do
@@ -45,6 +45,21 @@ module Shortly
   
       it 'should create a short url consisting of the scheme, host, and access token' do
         shortener = UrlShortener.new(url: 'http://www.nytimes.com', request_host: 'localhost', request_scheme: 'http')
+        expect(shortener.short_url).to eq "http://localhost/#{access_token}"
+      end
+
+      it 'should create a short url consisting of the scheme, host, port and access token' do
+        shortener = UrlShortener.new(url: 'http://www.nytimes.com', request_host: 'localhost', request_scheme: 'http', port: 3000)
+        expect(shortener.short_url).to eq "http://localhost:3000/#{access_token}"
+      end
+
+      it 'should not specify a port if the port is given as default http port' do
+        shortener = UrlShortener.new(url: 'http://www.nytimes.com', request_host: 'localhost', request_scheme: 'http', port: 80)
+        expect(shortener.short_url).to eq "http://localhost/#{access_token}"
+      end
+
+      it 'should not specify a port if the port is given as default https port' do
+        shortener = UrlShortener.new(url: 'http://www.nytimes.com', request_host: 'localhost', request_scheme: 'http', port: 443)
         expect(shortener.short_url).to eq "http://localhost/#{access_token}"
       end
     end

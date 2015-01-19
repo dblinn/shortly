@@ -21,7 +21,19 @@ module Shortly
     end
 
     post '/shorten' do
-      json UrlShortener.new(url: params[:url], request_host: request.host, request_scheme: request.scheme).response
+      json UrlShortener.new(url: params[:url], request_host: request.host, request_scheme: request.scheme,
+                            port: request.port).response
+    end
+
+    get %r{^/(#{AccessTokens::ACCESS_TOKEN_EXPRESSION})$} do
+      captured_token = params[:captures].first
+      source_url = UrlShortener.access_url_by_token(captured_token)
+      if source_url
+        redirect source_url
+      else
+        status 404
+        haml :error, locals: { error_message: "Oops! We weren't able to find a URL for #{captured_token} :("}
+      end
     end
   end
 end

@@ -6,19 +6,19 @@ module Shortly
     include Mongoid::Document
     include Mongoid::Timestamps::Created
 
-    field :original_url
+    field :source_url
     field :access_token
     field :times_accessed, type: Integer, default: 0
     field :times_shortened, type: Integer, default: 0
     field :last_accessed_time, type: Time, default: Time.current
     field :last_shortened_time, type: Time, default: Time.current
 
-    validates_presence_of :original_url
+    validates_presence_of :source_url
     # Don't validate_presence_of access_token on new record because the validation will happen before the before_create generates it
     validates_presence_of :access_token, unless: :new_record?
     before_create :ensure_unique_access_token
 
-    attr_readonly :original_url
+    attr_readonly :source_url
     attr_readonly :access_token
 
     scope :with_access_token, ->(access_token){ where(access_token: access_token) }
