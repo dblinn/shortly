@@ -22,6 +22,7 @@ module Shortly
     attr_readonly :access_token
 
     scope :with_access_token, ->(access_token){ where(access_token: access_token) }
+    scope :top_hundred, ->(){ order_by(times_accessed: :desc).limit(100) }
 
     def increment_times_accessed
       self.times_accessed += 1

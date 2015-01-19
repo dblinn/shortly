@@ -40,7 +40,7 @@ module Shortly
     describe '#short_url' do
       let(:access_token) { AccessTokens.generate }
       before(:each) do
-        expect(ShortUrl).to receive(:find_or_create_by) { double(access_token: access_token) }
+        expect(ShortUrl).to receive(:find_or_create_by) { double(access_token: access_token, increment_times_shortened: nil) }
       end
   
       it 'should create a short url consisting of the scheme, host, and access token' do

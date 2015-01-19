@@ -26,6 +26,7 @@ module Shortly
 
     def short_url
       shortened = ShortUrl.find_or_create_by(source_url: url)
+      shortened.increment_times_shortened
 
       "#{full_host_string}#{shortened.access_token}"
     end
@@ -35,6 +36,18 @@ module Shortly
       if short_url
         short_url.increment_times_accessed
         short_url.source_url
+      end
+    end
+
+    def top_hundred
+      ShortUrl.top_hundred.map do |short_url|
+        {
+            access_token: short_url.access_token,
+            short_url: "#{full_host_string}#{short_url.access_token}",
+            source_url: short_url.source_url,
+            times_accessed: short_url.times_accessed,
+            times_shortened: short_url.times_shortened
+        }
       end
     end
 

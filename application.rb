@@ -17,7 +17,9 @@ module Shortly
     end
 
     get '/top_hundred' do
-      'This is a placeholder for the top 100'
+      haml :top_hundred, locals: { top_hundred: UrlShortener.new(url: params[:url], request_host: request.host,
+                                                                 request_scheme: request.scheme,
+                                                                 port: request.port).top_hundred }
     end
 
     post '/shorten' do

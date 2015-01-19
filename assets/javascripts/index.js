@@ -67,7 +67,7 @@ ShortlyIndex.submissionForm = function() {
         $('#success-seed'),
         'short-link-text',
         data.short_url,
-        data.original_url,
+        data.source_url,
         true
       );
     }

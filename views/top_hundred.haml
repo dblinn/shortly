@@ -1,0 +1,24 @@
+%link(rel="stylesheet" href="stylesheets/top_hundred.css")
+
+%center
+  %a{ href: '/' }
+    %img{ src: 'images/shorts.png', class: 'shorts-logo' }
+  %p.top-hundred-title.bootstrap-green Top Hundred
+
+  %div.col-md-12
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %th Short Link
+          %th Source Link
+          %th Times Accessed
+          %th Times Shortened
+      %tbody
+        - top_hundred.each do |short_url|
+          %tr
+            %td
+              %a{href: short_url[:short_url]} #{short_url[:access_token]}
+            %td
+              %a{href: short_url[:source_url]} #{short_url[:source_url]}
+            %td= short_url[:times_accessed]
+            %td= short_url[:times_shortened]
