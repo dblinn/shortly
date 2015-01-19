@@ -1,12 +1,16 @@
 require 'sinatra'
-require 'sinatra/reloader' if development?
 require 'haml'
+require 'mongoid'
 require 'sinatra/json'
 require './lib/url_shortener'
+
+require 'sinatra/reloader' if development?
+require 'pry' if development?
 
 module Shortly
   class Application < Sinatra::Application
     set :public_folder, File.dirname(__FILE__) + '/assets'
+    Mongoid.load!('./mongoid.yml')
 
     get '/' do
       haml :index
@@ -17,7 +21,7 @@ module Shortly
     end
 
     post '/shorten' do
-      json UrlShortener.new(url: params[:url]).response
+      json UrlShortener.new(url: params[:url], request_host: request.host, request_scheme: request.scheme).response
     end
   end
 end

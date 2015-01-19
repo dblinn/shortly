@@ -17,6 +17,10 @@ It's going to be fun!
 * If you get an error describing a ruby version mismatch and you're using rvm, you can
 ** ```rvm use 2.2.0```
 
+* To set up the mongoDB database
+** Install [mongoDB](http://docs.mongodb.org/manual/installation/) if you haven't already
+** Make sure you have mongod running. The development and test environments assumes a default mongo port of 27017
+
 * To start the application
 ** ```thin start```
 ** You can then visit localhost:3000 to see the application

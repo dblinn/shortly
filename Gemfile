@@ -17,6 +17,7 @@ gem 'mongoid'
 group :development, :test do
 	gem 'rspec'
 	gem 'pry'
+	gem 'mongoid-rspec'
 end
 
 # Server
