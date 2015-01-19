@@ -1,4 +1,4 @@
-var ShortlyIndex = {};
+var ShortlyIndex = ShortlyIndex || {};
 
 ShortlyIndex.shortResult = function(seedElement) {
   this.seedElement = seedElement;
@@ -13,8 +13,8 @@ ShortlyIndex.shortResult = function(seedElement) {
 
   this.setOriginalUrl = function(originalUrl) {
     var link = this.seedElement.find('.full-link-link');
-    link.text(originalUrl);
-    link.attr('href', originalUrl);
+    link.text(Shortly.urlWithoutScheme(originalUrl));
+    link.attr('href', Shortly.urlWithScheme(originalUrl));
   };
 
   this.setupResult = function(resultTextName, resultTextMessage, success, originalUrl) {
@@ -22,7 +22,6 @@ ShortlyIndex.shortResult = function(seedElement) {
     this.setOriginalUrl(originalUrl);
   }
 };
-
 
 ShortlyIndex.submissionForm = function() {
 
@@ -34,7 +33,8 @@ ShortlyIndex.submissionForm = function() {
     var jsSubmissionForm = event.data;
 
     var urlToShorten = jsSubmissionForm.shortlyInput.val();
-    $.post('/shorten', { url: urlToShorten })
+    var validatedUrl = Shortly.validatedUrl(urlToShorten);
+    $.post('/shorten', { url: validatedUrl })
       .success($.proxy(jsSubmissionForm.shortenUrlSuccess, jsSubmissionForm))
       .fail($.proxy(jsSubmissionForm.shortenUrlFailure, { form: jsSubmissionForm, originalUrl: urlToShorten }));
 
@@ -51,8 +51,18 @@ ShortlyIndex.submissionForm = function() {
     this.shortlyInput.keypress(this, this.onInputChange);
   };
 
+  this.replaceInputText = function(newText) {
+    this.shortlyInput.val(newText);
+  };
+
+  this.selectInputText = function() {
+    this.shortlyInput.select();
+  };
+
   this.shortenUrlSuccess = function(data) {
     if (data.success) {
+      this.replaceInputText(data.short_url);
+
       this.addShortenResult(
         $('#success-seed'),
         'short-link-text',
@@ -64,6 +74,8 @@ ShortlyIndex.submissionForm = function() {
     else {
       this.showInvalidUrlText(data.original_url);
     }
+
+    this.selectInputText();
   };
 
   this.shortenUrlFailure = function() {
@@ -74,6 +86,8 @@ ShortlyIndex.submissionForm = function() {
       this.originalUrl,
       false
     );
+
+    this.selectInputText();
   };
 
   this.showInvalidUrlText = function(originalUrl) {
