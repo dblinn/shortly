@@ -7,7 +7,7 @@
   %center
     %a{ href: '/' }
       %img{ src: 'images/shorts.png', class: 'shorts-logo' }
-  %div.col-lg-6.col-lg-offset-3
+  %div.col-md-6.col-md-offset-3
     %form#shortly-form
       %div.input-group
         %input#shortly-input{ type: 'text', class: 'form-control', placeholder: 'Enter a URL...' }
@@ -16,20 +16,17 @@
     %div#invalid-url{style: 'clear: both'}
       %span.invalid-url-text.bootstrap-red.hidden Oops! this doesn't appear to be a valid url
 
-%div#shortened-responses.col-lg-6.col-lg-offset-3
+%div#shortened-responses.col-md-6.col-md-offset-3
   %div#success-seed.hidden
     %div.shorten-success-panel.bs-callout-success
-      %span.link-icon
-        %button.copy-button.btn.btn-sm.btn-default
-          %i{class: 'fa fa-copy fa-2x bootstrap-green'}
-      %span.short-link-text.bootstrap-green Hello
+      %a.short-link-text.bootstrap-green{ href: 'Hello' } Hello
       %div.full-link-text
-        %a.full-link-link{ href: 'www.nytimes.com' }www.nytimes.com
+        %a.full-link-link{ href: 'http://www.nytimes.com' }www.nytimes.com
   %div#failure-seed.hidden
     %div.shorten-failure-panel.bs-callout-danger
-      %span.failure-message.bootstrap-red We're experiencing technical difficulties
+      %span.failure-message.bootstrap-red Looks like something went wrong :(
       %div.full-link-text
-        %a.full-link-link{ href: 'www.nytimes.com' }www.nytimes.com
+        %a.full-link-link{ href: 'http://www.nytimes.com' }www.nytimes.com
 
 
 %script(src="javascripts/index.js")

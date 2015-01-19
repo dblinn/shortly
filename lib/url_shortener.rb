@@ -8,19 +8,14 @@ module Shortly
 
     def response
       {
-          success: valid?,
-          errors: errors,
+          success: is_valid?,
           original_url: url,
           short_url: short_url
       }
     end
 
-    def valid?
-      true
-    end
-
-    def errors
-      []
+    def is_valid?
+      false
     end
 
     def short_url

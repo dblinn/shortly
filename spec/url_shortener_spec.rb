@@ -13,7 +13,7 @@ describe 'Shortly::UrlShortener' do
     response = shortener.response
 
     expect(response).to_not be_nil
-    expect(response).to eq({ success: true, errors: [], original_url: 'www.nytimes.com', short_url: 'shorter' })
+    expect(response).to eq({ success: true, original_url: 'www.nytimes.com', short_url: 'shorter' })
   end
 
 end
