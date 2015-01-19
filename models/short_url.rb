@@ -9,12 +9,12 @@ module Shortly
     field :original_url
     field :access_token
     field :times_accessed, type: Integer, default: 0
-    field :times_shortened, type: Integer, default: 1
+    field :times_shortened, type: Integer, default: 0
     field :last_accessed_time, type: Time, default: Time.current
     field :last_shortened_time, type: Time, default: Time.current
 
     validates_presence_of :original_url
-    # Don't validate_presence_of access_token on new record because the validation will happen before the before_create generate it
+    # Don't validate_presence_of access_token on new record because the validation will happen before the before_create generates it
     validates_presence_of :access_token, unless: :new_record?
     before_create :ensure_unique_access_token
 

@@ -45,11 +45,11 @@ module Shortly
 
     describe '#increment_times_shortened' do
       it 'should increment the times shortened count' do
-        expect(short_url.times_shortened).to eq 1
+        expect(short_url.times_shortened).to eq 0
+        short_url.increment_times_shortened
+        expect(ShortUrl.find_by(original_url: original_url).times_shortened).to eq 1
         short_url.increment_times_shortened
         expect(ShortUrl.find_by(original_url: original_url).times_shortened).to eq 2
-        short_url.increment_times_shortened
-        expect(ShortUrl.find_by(original_url: original_url).times_shortened).to eq 3
       end
 
       it 'should update the last shortened time' do

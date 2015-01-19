@@ -1,4 +1,5 @@
 require 'uri'
+require './models/short_url'
 
 module Shortly
   class UrlShortener
@@ -23,7 +24,9 @@ module Shortly
     end
 
     def short_url
-      "#{@scheme}://#{@host}/shorter"
+      shortened = ShortUrl.find_or_create_by(original_url: url)
+
+      "#{@scheme}://#{@host}/#{shortened.access_token}"
     end
   end
 end
