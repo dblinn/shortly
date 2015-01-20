@@ -27,7 +27,7 @@
   background: rgba(240, 240, 240, 0.4)
 }
 
-.shortly-bar {
+  .shortly-bar {
   margin: 180px 0px 0px 0px;
 }
 
@@ -83,4 +83,9 @@
   position: absolute;
   left: 0;
   bottom: 0;
+}
+
+.shorts-logo {
+  width: 600px;
+  height: 250px;
 }
