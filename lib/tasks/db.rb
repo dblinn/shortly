@@ -1,10 +1,10 @@
 require 'rake'
-require './models/short_url'
+require_relative '../../models/short_url'
 
 def establish_db_environment
   ENV['RACK_ENV'] ||= 'development'
 
-  Mongoid.load!('./mongoid.yml')
+  require_relative '../../mongoid_config'
 end
 
 namespace :db do

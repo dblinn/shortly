@@ -2,7 +2,8 @@ require 'sinatra'
 require 'haml'
 require 'mongoid'
 require 'sinatra/json'
-require './lib/url_shortener'
+require_relative './lib/url_shortener'
+require_relative './mongoid_config'
 
 require 'sinatra/reloader' if development?
 require 'pry' if development?
@@ -10,7 +11,6 @@ require 'pry' if development?
 module Shortly
   class Application < Sinatra::Application
     set :public_folder, File.dirname(__FILE__) + '/assets'
-    Mongoid.load!('./mongoid.yml')
 
     get '/' do
       haml :index

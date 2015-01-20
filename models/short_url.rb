@@ -1,5 +1,5 @@
 require 'mongoid'
-require './lib/access_tokens'
+require_relative '../lib/access_tokens'
 
 module Shortly
   class ShortUrl

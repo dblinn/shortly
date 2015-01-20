@@ -1,9 +1,8 @@
 require 'mongoid'
 require 'mongoid-rspec'
+require_relative '../mongoid_config'
 
 RSpec.configure do |conf|
-  Mongoid.load!('./mongoid.yml')
-
   conf.include Mongoid::Matchers, type: :model
 
   # Clean/Reset Mongoid DB prior to running each test.

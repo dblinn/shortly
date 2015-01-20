@@ -1,5 +1,5 @@
-require './spec/spec_helper'
-require './lib/access_tokens'
+require_relative './spec_helper'
+require_relative '../lib/access_tokens'
 
 describe 'Shortly::AccessTokens' do
   describe '#generate' do

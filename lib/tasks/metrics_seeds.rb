@@ -1,6 +1,5 @@
 require 'rake'
-require './lib/tasks/db'
-require './models/short_url'
+require_relative './db'
 
 namespace :metrics do
   URL_SEEDS =

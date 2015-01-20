@@ -1,5 +1,5 @@
-require './spec/spec_helper'
-require './application'
+require_relative './spec_helper'
+require_relative '../application'
 
 module Shortly
   describe 'Application' do

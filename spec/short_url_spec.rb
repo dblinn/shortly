@@ -1,6 +1,6 @@
-require './spec/spec_helper'
-require './spec/mongoid_spec_helper'
-require './models/short_url'
+require_relative './spec_helper'
+require_relative './mongoid_spec_helper'
+require_relative '../models/short_url'
 
 module Shortly
   describe 'ShortUrl' do
