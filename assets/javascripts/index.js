@@ -72,7 +72,7 @@ ShortlyIndex.submissionForm = function() {
       );
     }
     else {
-      this.showInvalidUrlText(data.original_url);
+      this.showInvalidUrlText(data.source_url);
     }
 
     this.selectInputText();
