@@ -29,7 +29,7 @@ It's going to be fun!
 * To run the test suite
     - ```rspec```
 
-* To view the app on Heroku visit ```https://shortly-app.herokuapp.com/```
+* To view the app on Heroku visit [https://shortly-app.herokuapp.com/](https://shortly-app.herokuapp.com/)
 
 ## Design notes
 
