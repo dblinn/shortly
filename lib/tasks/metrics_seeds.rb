@@ -1,4 +1,5 @@
 require 'rake'
+require './lib/tasks/db'
 require './models/short_url'
 
 namespace :metrics do
@@ -88,15 +89,9 @@ namespace :metrics do
     Shortly::ShortUrl.find_or_create_by(source_url: URL_SEEDS.sample)
   end
 
-  def establish_environment
-    ENV['RACK_ENV'] ||= 'development'
-
-    Mongoid.load!('./mongoid.yml')
-  end
-
   desc 'Seed a list of urls with accesses to make the top hundred page more interesting (default 100)'
   task :seed_accesses, [:access_count] do |task, args|
-    establish_environment
+    establish_db_environment
 
     access_count = (args[:access_count] || 100).to_i
     access_count.times do
@@ -108,7 +103,7 @@ namespace :metrics do
 
   desc 'Seed a list of urls with shortenings to make the top hundred page more interesting (default 100)'
   task :seed_shortenings, [:access_count] do |task, args|
-    establish_environment
+    establish_db_environment
 
     access_count = (args[:access_count] || 100).to_i
     access_count.times do
