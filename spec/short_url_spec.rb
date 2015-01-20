@@ -7,6 +7,20 @@ module Shortly
     let(:source_url) { 'http://www.nytimes.com' }
     let(:short_url) { ShortUrl.find_or_create_by(source_url: source_url) }
 
+    describe '#scopes' do
+      it 'should find short urls with access tokens' do
+        expect(ShortUrl.with_access_token(short_url.access_token).first).to eq short_url
+      end
+
+      it 'should order the top hundred urls descending by times accessed' do
+        first_short_url = short_url
+        second_short_url = ShortUrl.find_or_create_by(source_url: 'http://www.facebook.com')
+        second_short_url.increment_times_accessed
+
+        expect(ShortUrl.top_hundred).to eq [second_short_url, first_short_url]
+      end
+    end
+
     describe '#find_or_create_by_source_url' do
       it 'should generate a valid access token' do
         expect(AccessTokens.valid?(short_url.access_token)).to be_truthy
