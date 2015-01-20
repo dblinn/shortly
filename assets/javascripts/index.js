@@ -28,27 +28,62 @@ ShortlyIndex.submissionForm = function() {
   this.shortlyInput = $('#shortly-input');
   this.shortenedResponses = $('#shortened-responses');
   this.invalidUrlText = $('.invalid-url-text');
+  this.submitButton = $('#shortly-shorten-button');
+  this.formSubmitEnabled = true;
 
   this.onFormSubmission = function(event) {
     var jsSubmissionForm = event.data;
 
     var urlToShorten = jsSubmissionForm.shortlyInput.val();
     var validatedUrl = Shortly.validatedUrl(urlToShorten);
-    $.post('/shorten', { url: validatedUrl })
-      .success($.proxy(jsSubmissionForm.shortenUrlSuccess, jsSubmissionForm))
-      .fail($.proxy(jsSubmissionForm.shortenUrlFailure, { form: jsSubmissionForm, originalUrl: urlToShorten }));
+    if (jsSubmissionForm.formSubmitEnabled) {
+      jsSubmissionForm.performSubmission(urlToShorten, validatedUrl);
+    }
 
     return false;
   };
 
+  this.performSubmission = function(urlToShorten, validatedUrl) {
+    $.post('/shorten', { url: validatedUrl })
+      .success($.proxy(this.shortenUrlSuccess, this))
+      .fail($.proxy(this.shortenUrlFailure, { form: this, originalUrl: urlToShorten }));
+
+    this.disableSubmission();
+  };
+
   this.onInputChange = function(event) {
+    if (event.keyCode == 13) {
+      return; // The enter key submits the form.
+    }
+
     var jsSubmissionForm = event.data;
     jsSubmissionForm.invalidUrlText.addClass('hidden');
+    jsSubmissionForm.enableSubmission();
+  };
+
+  this.onInputKeydown = function(event) {
+    if (event.keyCode == 8) { // The backspace key
+      var jsSubmissionForm = event.data;
+      jsSubmissionForm.invalidUrlText.addClass('hidden');
+      jsSubmissionForm.enableSubmission();
+    }
+  };
+
+  this.disableSubmission = function() {
+    this.formSubmitEnabled = false;
+    this.submitButton.attr('disabled','disabled');
+  };
+
+  this.enableSubmission = function() {
+    this.formSubmitEnabled = true;
+    this.submitButton.removeAttr('disabled');
   };
 
   this.initializeSubmissionForm = function() {
+    this.enableSubmission();
     $('#shortly-form').submit(this, this.onFormSubmission);
     this.shortlyInput.keypress(this, this.onInputChange);
+    this.shortlyInput.keydown(this, this.onInputKeydown);
   };
 
   this.replaceInputText = function(newText) {
@@ -87,6 +122,7 @@ ShortlyIndex.submissionForm = function() {
       false
     );
 
+    this.enableSubmission();
     this.selectInputText();
   };
 
