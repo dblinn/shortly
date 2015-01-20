@@ -29,7 +29,7 @@ module Shortly
       it 'should set the correct defaults' do
         expect(short_url.source_url).to eq source_url
         expect(short_url.times_accessed).to eq 0
-        expect(short_url.times_shortened).to eq 1
+        expect(short_url.times_shortened).to eq 0
         expect(short_url.last_shortened_time).to be <= Time.current
         expect(short_url.last_accessed_time).to be <= Time.current
       end

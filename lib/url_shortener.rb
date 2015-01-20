@@ -25,6 +25,8 @@ module Shortly
     end
 
     def short_url
+      return nil unless valid?
+
       shortened = ShortUrl.find_or_create_by(source_url: url)
       shortened.increment_times_shortened
 
