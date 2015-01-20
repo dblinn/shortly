@@ -56,6 +56,10 @@ module Shortly
     private
 
     def full_host_string
+      @full_host_string ||= build_full_host_string
+    end
+
+    def build_full_host_string
       return "#{@scheme}://#{@host}:#{@port}/" if (@port && @port != 80 && @port != 443)
       "#{@scheme}://#{@host}/"
     end
