@@ -31,6 +31,19 @@ It's going to be fun!
 
 * To view the app on Heroku visit [https://shortly-app.herokuapp.com/](https://shortly-app.herokuapp.com/)
 
+Please contact me if you have any problems getting the application to run. It uses the latest version of Ruby, Mongo, and a number of Ruby gems. If something about your environment causes the pickup of old versions of things, I could see it being quite easy to end up in dependency hell.
+
 ## Design notes
 
+### Challenges
+
+### Future Work
 * TODO
+- better test coverage (particularly on javascript) jasmine/karma
+- self references (links to shortly links should just return the original link and shouldn't be counted)
+- update logo
+- display more metrics
+- d3.js display (bubbles)
+- rake task to clean up bad data (the what's up doc link, etc.)
+- security audit
+- custom (short) domain name

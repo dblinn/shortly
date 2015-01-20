@@ -15,22 +15,25 @@ module Shortly
     def response
       {
           success: valid?,
-          source_url: url,
-          short_url: short_url
+          source_url: source_url,
+          short_url: short_url_string
       }
     end
 
     def valid?
-      (url =~ /\A#{URI::regexp(['http', 'https'])}\z/) != nil
+      @valid = ((url =~ /\A#{URI::regexp(['http', 'https'])}\z/) != nil) if @valid.nil?
+      @valid
+    end
+
+    def short_url_string
+      return nil unless short_url
+      "#{full_host_string}#{short_url.access_token}"
     end
 
     def short_url
-      return nil unless valid?
-
-      shortened = ShortUrl.find_or_create_by(source_url: url)
-      shortened.increment_times_shortened
-
-      "#{full_host_string}#{shortened.access_token}"
+      return @short_url if @short_url_looked_up
+      @short_url = lookup_short_url
+      @short_url_looked_up = true
     end
 
     def self.access_url_by_token(access_token)
@@ -53,7 +56,29 @@ module Shortly
       end
     end
 
+    def own_url?
+      @own_url = check_if_own_url if @own_url.nil?
+      @own_url
+    end
+
     private
+
+    def source_url
+      own_url?
+    end
+
+    def lookup_short_url
+      return nil unless valid?
+
+      shortened = ShortUrl.find_or_create_by(source_url: url)
+      shortened.increment_times_shortened
+
+      shortened
+    end
+
+    def check_if_own_url
+      url =~ /^#{full_host_string}#{AccessTokens::ACCESS_TOKEN_EXPRESSION}$/
+    end
 
     def full_host_string
       @full_host_string ||= build_full_host_string
