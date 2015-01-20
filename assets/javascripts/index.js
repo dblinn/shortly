@@ -83,6 +83,7 @@ ShortlyIndex.submissionForm = function() {
     this.enableSubmission();
     $('#shortly-form').submit(this, this.onFormSubmission);
     this.shortlyInput.keypress(this, this.onInputChange);
+    this.shortlyInput.on('paste', this, this.onInputChange);
     this.shortlyInput.keydown(this, this.onInputKeydown);
   };
 
